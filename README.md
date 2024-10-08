@@ -20,7 +20,9 @@ Proyecto de Clase para la Unidad 1 de la Asignatura de Desarrollo Móvil Integra
 |8|Funciones y Parametros|11|Finalizada|
 |9|Clases y Sobreescritura de Metodos Nativos|9|Finalizada|
 |10|Constructores Nombrados|8|Finalizada|
-|11|Getters (Lectura Controlada) y Setters (Modificaciòn Controlada)|9|Activa|
+|11|Getters (Lectura Controlada) y Setters (Modificaciòn Controlada)|9|Finalizada|
+|12|Class Abstract (Clase Abstracta)|11|Activa|
+|Tarea 04|Use de las Clases Abstractas en el caso de Estudio|10|Activa|
 
 ### LISTA DE HERRAMIENTAS
 
