@@ -23,6 +23,7 @@ Proyecto de Clase para la Unidad 1 de la Asignatura de Desarrollo Móvil Integra
 |11|Getters (Lectura Controlada) y Setters (Modificaciòn Controlada)|9|Finalizada|
 |12|Class Abstract (Clase Abstracta)|11|Activa|
 |Tarea 04|Use de las Clases Abstractas en el caso de Estudio|10|Activa|
+|13|Aserciones|3|Activa|
 
 ### LISTA DE HERRAMIENTAS
 
