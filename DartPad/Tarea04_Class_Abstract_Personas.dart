@@ -253,4 +253,3 @@ class Paciente extends Persona {
     """;
   }
 }
-
