@@ -23,10 +23,10 @@ void main() {
 
   print(paciente1);
   paciente1.actualizarEstatusMedico("En tratamiento"); // Actualiza el estatus médico
-  print(paciente1); // Muestra la información actualizada
+  print("Información después de actualizar estatus médico:\n${paciente1}\n"); // Muestra la información actualizada
 
   // ========= Caso de Prueba 2: Paciente que fue trabajador del hospital =========
-  print("\n========= Caso 2: Paciente que fue trabajador del hospital =========");
+  print("========= Caso 2: Paciente que fue trabajador del hospital =========");
   final paciente2 = Paciente(
     personaID: 2,
     nss: "987654321",
@@ -50,7 +50,7 @@ void main() {
   print(paciente2);
 
   // ========= Caso de Prueba 3: Paciente que acaba de fallecer =========
-  print("\n========= Caso 3: Paciente que acaba de fallecer =========");
+  print("========= Caso 3: Paciente que acaba de fallecer =========");
   final paciente3 = Paciente(
     personaID: 3,
     nss: "1122334455",
@@ -72,7 +72,7 @@ void main() {
   );
 
   paciente3.registrarDefuncion(); // Llamamos al método para registrar defunción
-  print(paciente3);
+  print("Información después de registrar defunción:\n${paciente3}\n");
 }
 
 // ========= 1. Definición de la Clase Abstracta <Persona> =========
@@ -114,9 +114,11 @@ abstract class Persona {
     String formateDate = "${fechaNacimiento.day.toString().padLeft(2, '0')}/" +
         "${fechaNacimiento.month.toString().padLeft(2, '0')}/${fechaNacimiento.year}";
     String formateCreateDate = "${fechaRegistro.day.toString().padLeft(2, '0')}/" +
-        "${fechaRegistro.month.toString().padLeft(2, '0')}/${fechaRegistro.year}";
+        "${fechaRegistro.month.toString().padLeft(2, '0')}/${fechaRegistro.year} " +
+        "${fechaRegistro.hour.toString().padLeft(2, '0')}:${fechaRegistro.minute.toString().padLeft(2, '0')}";
     String formateUpdateDate = "${fechaActualizacion.day.toString().padLeft(2, '0')}/" +
-        "${fechaActualizacion.month.toString().padLeft(2, '0')}/${fechaActualizacion.year}";
+        "${fechaActualizacion.month.toString().padLeft(2, '0')}/${fechaActualizacion.year} " +
+        "${fechaActualizacion.hour.toString().padLeft(2, '0')}:${fechaActualizacion.minute.toString().padLeft(2, '0')}";
 
     return """
     --------------------------------------------------------------
@@ -214,19 +216,25 @@ class Paciente extends Persona {
     fechaActualizacion = DateTime.now(); // Actualiza la fecha de modificación
   }
 
-  // ========= 6. Sobrescritura de la Función registrarDefuncion() =========
-  // Método para registrar la defunción del paciente
+  // Sobrescritura de la función para registrar defunción
   void registrarDefuncion() {
-    estatusVida = "Finado"; // Actualiza el estatus de vida
-    estatus = false; // Cambia el estado a inactivo
-    fechaActualizacion = DateTime.now(); // Actualiza la fecha de modificación
+    estatusVida = "Finado"; // Cambia el estatus de vida a finado
+    eliminarPaciente(); // Marca al paciente como inactivo
   }
 
-  // Sobrescritura del método toString para mostrar información del paciente
+  // Sobreescritura del método toString para mostrar información del paciente
   @override
   String toString() {
     String formateUltimaCita = "${fechaUltimaCita.day.toString().padLeft(2, '0')}/" +
-        "${fechaUltimaCita.month.toString().padLeft(2, '0')}/${fechaUltimaCita.year}";
+        "${fechaUltimaCita.month.toString().padLeft(2, '0')}/${fechaUltimaCita.year} " +
+        "${fechaUltimaCita.hour.toString().padLeft(2, '0')}:${fechaUltimaCita.minute.toString().padLeft(2, '0')}";
+
+    String formateCreateDate = "${fechaRegistro.day.toString().padLeft(2, '0')}/" +
+        "${fechaRegistro.month.toString().padLeft(2, '0')}/${fechaRegistro.year} " +
+        "${fechaRegistro.hour.toString().padLeft(2, '0')}:${fechaRegistro.minute.toString().padLeft(2, '0')}";
+    String formateUpdateDate = "${fechaActualizacion.day.toString().padLeft(2, '0')}/" +
+        "${fechaActualizacion.month.toString().padLeft(2, '0')}/${fechaActualizacion.year} " +
+        "${fechaActualizacion.hour.toString().padLeft(2, '0')}:${fechaActualizacion.minute.toString().padLeft(2, '0')}";
 
     return """
     --------------------------------------------------------------
@@ -239,7 +247,10 @@ class Paciente extends Persona {
     Estatus de Vida: $estatusVida
     Fecha de Última Cita: $formateUltimaCita
     Estatus: ${estatus ? 'Activo' : 'Inactivo'}
+    Fecha de Registro: $formateCreateDate
+    Fecha de Actualización: $formateUpdateDate
     --------------------------------------------------------------
     """;
   }
 }
+
