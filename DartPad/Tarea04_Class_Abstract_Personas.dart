@@ -1,6 +1,6 @@
 void main() {
-  // Caso 1: Nuevo paciente que se registra el día de hoy
-  print("========= Caso 1: Nuevo paciente =========");
+  // ========= Caso de Prueba 1: Nuevo paciente registrado hoy =========
+  print("========= Caso 1: Nuevo paciente registrado hoy =========");
   final paciente1 = Paciente(
     ID: 1,
     name: "Carlos",
@@ -16,7 +16,7 @@ void main() {
   
   print(paciente1);
 
-  // Caso 2: Paciente nuevo que alguna vez fue trabajador del hospital
+  // ========= Caso de Prueba 2: Paciente que fue trabajador del hospital =========
   print("\n========= Caso 2: Paciente que fue trabajador del hospital =========");
   final paciente2 = Paciente(
     ID: 2,
@@ -31,11 +31,11 @@ void main() {
     estatusMedico: "En tratamiento",
   );
   
-  paciente2.trabajadorPrevio = true;  // El paciente fue trabajador del hospital
+  paciente2.trabajadorPrevio = true; // Marcamos como trabajador previo
   print(paciente2);
 
-  // Caso 3: Paciente que acaba de fallecer
-  print("\n========= Caso 3: Paciente fallecido =========");
+  // ========= Caso de Prueba 3: Paciente que acaba de fallecer =========
+  print("\n========= Caso 3: Paciente que acaba de fallecer =========");
   final paciente3 = Paciente(
     ID: 3,
     name: "Luis",
@@ -49,13 +49,11 @@ void main() {
     estatusMedico: "Crítico",
   );
   
-  paciente3.registrarDefuncion();
+  paciente3.registrarDefuncion(); // Llamamos al método para registrar defunción
   print(paciente3);
 }
 
-// Enum para el tipo de seguro
-enum TipoSeguro { IMSS, ISSSTE, SeguroPopular }
-
+// ========= 1. Definición de la Clase Abstracta Persona =========
 // Clase abstracta Persona
 abstract class Persona {
   int ID;
@@ -75,8 +73,8 @@ abstract class Persona {
     required this.gender,
     required this.birthdate,
     DateTime? fechaRegistro,
-    this.isActive = true,
-  }) : fechaRegistro = fechaRegistro ?? DateTime.now();
+    this.isActive = true, // Se inicializa por defecto como "activo"
+  }) : fechaRegistro = fechaRegistro ?? DateTime.now(); // Fecha de registro actual por defecto
 
   @override
   String toString() {
@@ -100,11 +98,13 @@ abstract class Persona {
   }
 }
 
+// ========= 2. Definición de la Clase Paciente =========
 // Clase Paciente que hereda de Persona
 class Paciente extends Persona {
+  // ========= 3. Declaración de las Propiedades de Paciente =========
   String NSS;
   String tipoSeguro;
-  String estatusVida; // "Vivo" o "Fallecido"
+  String estatusVida;
   String estatusMedico;
   DateTime? fechaUltimaCita;
   bool trabajadorPrevio;
@@ -121,7 +121,7 @@ class Paciente extends Persona {
     required this.estatusVida,
     required this.estatusMedico,
     DateTime? fechaUltimaCita,
-    this.trabajadorPrevio = false,
+    this.trabajadorPrevio = false, // Por defecto, el paciente no fue trabajador del hospital
   }) : super(
           ID: ID,
           name: name,
@@ -130,15 +130,19 @@ class Paciente extends Persona {
           gender: gender,
           birthdate: birthdate,
         ) {
+    // ========= 4. Sobrescritura de las Propiedades =========
+    // Fecha de última cita se inicializa con la fecha actual por defecto
     this.fechaUltimaCita = fechaUltimaCita ?? DateTime.now();
   }
 
+  // ========= 6. Sobrescritura de la Función registrarDefuncion() =========
   // Método para registrar la defunción del paciente
   void registrarDefuncion() {
     estatusVida = "Fallecido";
-    isActive = false;
+    isActive = false; // Cambia el estado de la persona a "inactivo"
   }
 
+  // ========= Sobrescritura del método toString() para mostrar datos de paciente =========
   @override
   String toString() {
     String baseInfo = super.toString();
